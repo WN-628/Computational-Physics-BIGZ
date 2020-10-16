@@ -16,6 +16,7 @@ G = 6.674*10**(-11)
 h_min = 0
 h_max = 1000
 R = 6.371*10**6
+C = 4*10**(-5)  # C = b/m
 
 # Use Euler Method to plot a projectile with not air drag
 t_arr = np.linspace(t_min, t_max, 1000)
@@ -47,9 +48,23 @@ def dy_next(a, b):
     return a + b*dt
 
 
-def vy_next(vy, y_val):
+def vy_next(v, vy, y_val, airdrag):
     _g = G*Me/((y_val+R)**2)
+    if airdrag:
+        return vy - _g*dt - C*v*vy*dt
     return vy - _g*dt
+
+
+def vx_next(v, vx, vy, airdrag):
+    if airdrag:
+        return vx - C*v*vx*dt
+    return vx
+
+
+def findDomainIndex(arr):
+    for i in range(len(arr)):
+        if (arr[i] < 0):
+            return i
 
 
 for i in range(len(t_arr)):
@@ -57,9 +72,11 @@ for i in range(len(t_arr)):
     vy[i] = vy_val
     x[i] = x_val
     y[i] = y_val
+    v = (vx_val**2 + vy_val**2)**(1/2)
     x_val = dx_next(x_val, vx_val)
     y_val = dy_next(y_val, vy_val)
-    vy_val = vy_next(vy_val, y_val)
+    vx_val = vx_next(v, vx_val, vy_val, True)
+    vy_val = vy_next(v, vy_val, y_val, True)
 
 # plt.plot(x, y)
 # plt.show()
@@ -69,8 +86,10 @@ for i in range(len(t_arr)):
 #     x_true[i] = vx_true*_t
 #     y_true[i] = v0*math.sin(theta)*_t - 1/2*g*_t**2
 
-plt.plot(x, y)
-plt.title("Projectile Motion with varing g")
+domain = findDomainIndex(y)
+
+plt.plot(x[: domain], y[: domain])
+plt.title("Projectile Motion with varing g with airdrag")
 plt.show()
 
 
