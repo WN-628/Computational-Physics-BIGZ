@@ -126,11 +126,11 @@ plt.show()
 
 # %%
 m = 1   ##mass of the block
-b = 10  #Drag constant
+b = 0.1  #Drag constant
 k = 10  #spring constant
 O = (k/m)**(1/2)  #Natural frequency of the system
-F0 = 10 #External Force
-n = 10  #How many periods
+F0 = 5 #External Force
+n = 50  #How many periods
 P = 2*np.pi*(m/k)**(1/2)  #Periods
 T_max = n*P  #maximum time span
 steps = 1000  
@@ -142,15 +142,21 @@ x_arr[0] = 0
 v_arr = np.zeros(steps)
 v_arr[0] = 10
 
-def next_v(v, x, t):
-    return v + (- k*x - b*v + F0*np.sin())/m*dt
+def next_v(v, x, t, a):
+    return v + (- k*x - b*v + F0*np.sin(a*O*t))/m*dt
 
 def next_x(v, x):
     return x + v*dt
 
-for i in range(1, steps):
-    v_arr[i] = next_v(v_arr[i - 1], x_arr[i - 1])
-    x_arr[i] = next_x(v_arr[i], x_arr[i - 1])
-plt.plot(t_arr, x_arr)
-plt.legend([])
+for Omega in [0.001, 0.1, 1, 10, 1000]:
+    for i in range(1, steps):
+        v_arr[i] = next_v(v_arr[i - 1], x_arr[i - 1], t_arr[i], Omega)
+        x_arr[i] = next_x(v_arr[i], x_arr[i - 1])
+    plt.plot(t_arr, x_arr)
+plt.legend(["Omega = 0.001", "Omega = 0.1", "Omega = 1", "Omega = 10", "Omega = 1000"])
 plt.show()
+
+# %%
+m = 1
+L = 10
+g = 9.8
