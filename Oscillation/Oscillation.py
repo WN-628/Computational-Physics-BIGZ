@@ -160,3 +160,26 @@ plt.show()
 m = 1
 L = 10
 g = 9.8
+T_max = 50  #maximum time span
+steps = 1000
+dt = T_max / steps  #Discretize time
+
+t_arr = np.linspace(0, T_max, steps)
+Theta_arr = np.zeros(steps)
+Theta_arr[0] = 36*2*np.pi/360
+O_arr = np.zeros(steps)
+O_arr[0] = 0
+
+def next_Omega(theta, Omega):
+    return Omega - g/L*np.sin(theta)*dt 
+
+def next_theta(theta, Omega):
+    return theta + Omega*dt
+
+for i in range(1, steps):
+    O_arr[i] = next_Omega(Theta_arr[i - 1], O_arr[i - 1])
+    Theta_arr[i] = next_theta(Theta_arr[i - 1], O_arr[i])
+plt.plot(t_arr, Theta_arr)
+# plt.plot(t_arr, O_arr)
+plt.show()
+# %%
