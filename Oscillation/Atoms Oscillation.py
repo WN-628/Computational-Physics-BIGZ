@@ -42,3 +42,28 @@ plt.show()
 
 # %%
 # Full Spring Model
+import numpy as np
+import matplotlib.pyplot as plt
+
+m = 5
+kx = 1
+ky = 10
+L = 10
+T_max = 50  #maximum time span
+steps = 1000
+dt = T_max / steps  #Discretize time
+
+t_arr = np.linspace(0, T_max, steps)
+vx_arr = np.zeros(steps)
+vx_arr[0] = 0
+x_arr = np.zeros(steps)
+x_arr[0] = 5
+vy_arr = np.zeros(steps)
+vy_arr[0] = 0
+y_arr = np.zeros(steps)
+y_arr[0] = 5
+r_arr = np.zeros(steps)
+
+for i in range(steps):
+    r[i] = (x_arr[i]**2 + y_arr[i]**2)**1/2
+
