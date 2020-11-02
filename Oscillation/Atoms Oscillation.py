@@ -115,5 +115,3 @@ def animate(i):
 anim = animation.FuncAnimation(fig, animate, init_func=init,
                                frames=5000, interval=100, blit=True) 
 anim.save('pic.gif', writer='imagemagick')
-
-XX# %%
