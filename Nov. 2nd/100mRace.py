@@ -31,4 +31,14 @@ for i in range(1, steps):
 # plt.plot(t_arr, v_arr)
 plt.plot(t_arr, x_arr)
 plt.show()
-# %%
+
+def find_x_index(x, arr):
+    for i in range(len(arr)):
+        if (arr[i] > x):
+            return i
+
+print("It takes ", t_arr[find_x_index(100, x_arr)], "for the runner to run 100m. ")
+
+max_velocity = np.max(v_arr)
+print("The maximum velocity of the person is ", max_velocity)
+
