@@ -21,14 +21,17 @@ rho = 1.2
 A = pi*ball.radius**2
 Fnet = (g*ball.mass - 0.5*rho*c*A*mag(ball.p/ball.mass)**2*ball.p/mag(ball.p))
 
-while t < 4:
-    rate(300)
-    ball.pos = ball.pos + (ball.p/ball.mass)*dt
+posgraph = gcurve(color = color.green)
+
+while t < 40:
+    rate(800)
     ball.p = ball.p + Fnet*dt
-    t = t*dt
+    ball.pos = ball.pos + (ball.p/ball.mass)*dt
+    t = t + dt
+
+    posgraph.plot(pos = (t, ball.pos.y))
+    posgraph.plot()
 
     if ball.pos.y < (floor.pos.y + ball.radius):
         ball.p = -ball.p
-
-posgraph = gcurve(color = color.green)
-posgraph.plot(pos = (t, ball.pos.y))
+        
