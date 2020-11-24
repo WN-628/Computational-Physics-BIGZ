@@ -5,6 +5,8 @@ from vpython import *
 # http://techforcurious.website/simulation-of-pendulum-vpython-tutorial-visual-python/
 
 # Initialize the objects
+# canvas(width = 1280, height = 720)
+canvas(width = 3840, height = 2160)
 bob = sphere(pos = vector(5, 2, 0), radius = 0.5)
 pivot = vector(0, 20, 0)
 Ceiling = box(pos = pivot, size = vector(10, 0.5, 10), color = color.green)
@@ -23,8 +25,8 @@ v_y = 0
 
 # Initialize the time
 tmin = 0
-tmax = 100
-step = 10000
+tmax = 500
+step = 100000
 dt = (tmax - tmin)/step
 
 t = 0
@@ -35,7 +37,7 @@ while(t < tmax):
     v_x += acc_x*dt
     acc_y = (- m*g + Fel*cos(theta))/m
     v_y += acc_y*dt
-    rate(100) #maximum 100 calculations per second
+    rate(500) #maximum 100 calculations per second
     acc = -g/L*sin(theta) #updatin of auglar acceleration
     theta = theta + angvel*dt #updating of angular position
     angvel = angvel + acc*dt #updating of angular velocity
