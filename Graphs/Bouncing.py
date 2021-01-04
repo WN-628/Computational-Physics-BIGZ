@@ -30,8 +30,7 @@ while t < 40:
     t = t + dt
 
     posgraph.plot(pos = (t, ball.pos.y))
-    posgraph.plot()
 
     if ball.pos.y < (floor.pos.y + ball.radius):
         ball.p = -ball.p
-        
+
