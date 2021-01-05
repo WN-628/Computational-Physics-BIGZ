@@ -29,3 +29,4 @@ plt.plot(t, Y[1],'-', label='r(t)')
 plt.plot(t, Y[2],'-', label='phi(t)')
 plt.legend(loc='best')
 plt.xlabel('T')
+
