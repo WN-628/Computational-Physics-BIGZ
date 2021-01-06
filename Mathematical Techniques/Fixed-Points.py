@@ -1,6 +1,3 @@
-from vpython.vpython import pyramid
-
-
 import numpy as np
 
 g = lambda x : 2 - np.exp(-x)
