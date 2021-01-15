@@ -10,12 +10,15 @@ def minima(xlow, xhigh, f, Nmax):
         x1 = xlow + d
         x2 = xhigh - d
         if(f(x1) < f(x2)):
-            xhigh = x2
+            xlow = x2
         elif(f(x1) > f(x2)):
-            xlow = x1
+            xhigh = x1
         n = n + 1
     print("The minima is ", f((xlow + xhigh) / 2), " when x = ", (xlow + xhigh) / 2)
 
-g = lambda x : (x - 1)**2
-
-minima(-1, 2, g, 500)
+#%%
+A = 150
+AR = 6.5
+C_D0 = 0.018
+rho = 0.413
+W = 670*10**3
