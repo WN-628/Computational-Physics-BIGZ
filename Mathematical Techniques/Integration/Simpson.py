@@ -1,7 +1,7 @@
 #%%
 import numpy as np
 
-def integrate(f, a, b, n=1000):
+def Simpson(f, a, b, n=1000):
     h = (b-a)/n
     k = 0.0
     x = a+h
@@ -15,4 +15,4 @@ def integrate(f, a, b, n=1000):
         x += 2*h
     return (h/3)*(f(a)+f(b)+k)
 
-print(integrate(lambda x: x**3, 2, 4, 1000000))
+print(Simpson(lambda x: x**3, 2, 4, 1000000))
