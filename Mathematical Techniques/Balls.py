@@ -43,12 +43,14 @@ def withoutReplacement(blue, red, times):
     else:
         return 0
 
-for i in range(1, 1001):
-    re = []
+re = []
+withoutRe = []
+for i in range(1, 1000001):
     re.append(replecement(3, 3, 3))
-    withoutRe = []
     withoutRe.append(withoutReplacement(3, 3, 3))
 
 print("The probability for the replacement situation is ", re.count(1)/len(re))
 print("The probability for the withoutReplacement situation is ", withoutRe.count(1)/len(withoutRe))
 
+
+# %%
