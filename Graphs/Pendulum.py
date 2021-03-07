@@ -6,7 +6,7 @@ from vpython import *
 
 # Initialize the objects
 # canvas(width = 1280, height = 720)
-canvas(width = 3840, height = 2160)
+canvas(width = 3840, height = 2160, color=color.white)
 bob = sphere(pos = vector(5, 2, 0), radius = 0.5)
 pivot = vector(0, 20, 0)
 Ceiling = box(pos = pivot, size = vector(10, 0.5, 10), color = color.green)
