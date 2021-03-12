@@ -7,7 +7,9 @@ from vpython import *
 
 # Constant
 m1 = 5 # Mass of the ball at the left (kg)
+v1 = 0 # The speed of ball1 (m/s)
 m2 = 10 # Mass of the ball at the right (kg)
+v2 = 0 # The speed of ball2 (m/s)
 Ls = 10 # Length of the string (m)
 L0 = 10 # Original length of the spring (m)
 L = L0 # Instant length of the spring(m)
@@ -36,6 +38,18 @@ lengthDisp = wtext(text='pos of ball 2 {};  '.format(bob2.pos))
 lengthDisp = wtext(text='theta2 {} radians \n'.format(theta2))
 
 # Set up time ranges
+tmin = 0
+tmax = 500
+step = 1000000
+dt = (tmax - tmin)/step
 
+t = 0 #record the time
 
 # Record the motion
+while(t < tmax):
+    a1 = np.sqrt((-m1*g*bob1.pos.x/Ls + k*(bob2.pos.x - bob1.pos.x))/m1)
+    a2 = np.sqrt((-m2*g*bob2.pos.x/Ls - k*(bob2.pos.x - bob1.pos.x))/m2)
+    v1 = v1 + a1*dt
+    v2 = v2 + a2*dt
+
+    t = t + dt
