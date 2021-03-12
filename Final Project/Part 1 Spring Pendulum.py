@@ -22,7 +22,8 @@ pivot = vector(0, 20, 0)
 bob = sphere(pos = vector(pivot.x + L*np.sin(theta), pivot.y - L*np.cos(theta), 0), radius = 0.5)
 Ceiling = box(pos = pivot, size = vector(10, 0.5, 10), color = color.green)
 rod = helix(pos = pivot, axis = bob.pos-pivot, radius = 0.5, coils = 30)
-lengthDisp = wtext(text='{}'.format(L))
+# lengthDisp = wtext(text='The length of the spring: {} m'.format(L))
+lengthDisp = wtext(text='length of the spring: {} m'.format(L))
 
 #Set up the time range
 tmin = 0
@@ -32,6 +33,7 @@ dt = (tmax - tmin)/step
 
 t = 0 #record the time
 
+# Record the motion
 while(t < tmax):
     tor = m*g*sin(theta)*L
     angularAcc = tor / (m*L**2)
@@ -42,6 +44,6 @@ while(t < tmax):
     bob.pos = vector(pivot.x + L*np.sin(theta), pivot.y - L*np.cos(theta) + v_y*dt, 0)
     rod.axis = bob.pos - rod.pos
     t = t + dt
-    lengthDisp.text = '{}'.format(L)
+    lengthDisp.text = 'length of the spring: {} m'.format(L)
 
 # %%
