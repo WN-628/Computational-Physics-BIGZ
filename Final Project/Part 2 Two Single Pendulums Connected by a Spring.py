@@ -16,7 +16,9 @@ L = L0 # Instant length of the spring(m)
 k = 10 # Spring constant (kg / s^2)
 g = 9.8 # Gravitational constant
 theta1 = -np.pi/20 # The angle for the first ball
+initial1 = theta1
 theta2 = np.pi/20 # The angle for the second ball
+initial2 = theta2
 
 # Initialize the objects
 canvas(width = 1280, height = 720) # For 1080p screen
@@ -36,6 +38,8 @@ b = wtext(text='pos of ball 1 {};  '.format(bob1.pos))
 c = wtext(text='theta1 {} radians \n'.format(theta1))
 d = wtext(text='pos of ball 2 {};  '.format(bob2.pos))
 e = wtext(text='theta2 {} radians \n'.format(theta2))
+period1 = wtext(text = 'the period of ball 1\'s oscillation is '.format())
+period2 = wtext(text = 'the period of ball 2\'s oscillation is '.format())
 
 # Set up time ranges
 tmin = 0
@@ -46,6 +50,9 @@ dt = (tmax - tmin)/step
 t = 0 #record the time
 
 # Record the motion
+
+t1 = [0, 0]
+t2 = [0, 0]
 
 while(t < tmax):
     d1 = bob1.pos.x - pivot1.x
@@ -61,7 +68,13 @@ while(t < tmax):
     v2 = v2 + a2*dt
     x2 = bob2.pos.x + v2*dt
     theta2 = x2 / Ls
-    y2 = np.sqrt(Ls**2 - (x2 - pivot2.x)**2)\
+    y2 = np.sqrt(Ls**2 - (x2 - pivot2.x)**2)
+
+    if(theta1 == initial1):
+        t1.append(t - t1[-1])
+    
+    if(theta2 == initial2):
+        t2.append(t - t2[-1])
 
     # Update the position of both balls
     bob1.pos = vector(x1, y1, 0)
@@ -73,11 +86,13 @@ while(t < tmax):
     spring.axis = bob2.pos - bob1.pos
     L = spring.length
 
-    a.text='length of the spring: {} m \n'.format(L)
-    b.text='pos of ball 1 {};  '.format(bob1.pos)
-    c.text='theta1 {} radians \n'.format(theta1)
-    d.text='pos of ball 2 {};  '.format(bob2.pos)
-    e.text='theta2 {} radians \n'.format(theta2)
+    a.text = 'length of the spring: {} m \n'.format(L)
+    b.text = 'pos of ball 1 {};  '.format(bob1.pos)
+    c.text = 'theta1 {} radians \n'.format(theta1)
+    d.text = 'pos of ball 2 {};  '.format(bob2.pos)
+    e.text = 'theta2 {} radians \n'.format(theta2)
+    period1 = 'the period of ball 1\'s oscillation is '.format(np.average(t1))
+    period2 = 'the period of ball 2\'s oscillation is '.format(np.average(t2))
 
     rate(50)
     t = t + dt
