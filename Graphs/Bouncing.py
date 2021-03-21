@@ -1,6 +1,6 @@
 #%% 
 from numpy import *
-from matplotlib.pyplot import *
+# from matplotlib.pyplot import *
 from vpython import *
 
 # Initialize the objects

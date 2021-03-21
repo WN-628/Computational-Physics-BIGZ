@@ -112,6 +112,5 @@ def animate(i):
     return line,
 # Change frame and interval according to your data. 
 # frames should be the length of your data array. 
-anim = animation.FuncAnimation(fig, animate, init_func=init,
-                               frames=5000, interval=100, blit=True) 
+anim = animation.FuncAnimation(fig, animate, init_func=init,frames=5000, interval=100, blit=True) 
 anim.save('pic.gif', writer='imagemagick')

@@ -8,17 +8,15 @@ from vpython import *
 # Constant
 m1 = 5 # Mass of the ball at the left (kg)
 v1 = 0 # The speed of ball1 (m/s)
-m2 = 5 # Mass of the ball at the right (kg)
+m2 = 10 # Mass of the ball at the right (kg)
 v2 = 0 # The speed of ball2 (m/s)
 Ls = 10 # Length of the string (m)
 L0 = 10 # Original length of the spring (m)
 L = L0 # Instant length of the spring(m)
 k = 10 # Spring constant (kg / s^2)
 g = 9.8 # Gravitational constant
-theta1 = -np.pi/20 # The angle for the first ball
-initial1 = theta1
-theta2 = np.pi/20 # The angle for the second ball
-initial2 = theta2
+theta1 = -np.pi/30 # The angle for the first ball
+theta2 = np.pi/50 # The angle for the second ball
 
 # Initialize the objects
 canvas(width = 1280, height = 720) # For 1080p screen
@@ -38,8 +36,10 @@ b = wtext(text='pos of ball 1 {};  '.format(bob1.pos))
 c = wtext(text='theta1 {} radians \n'.format(theta1))
 d = wtext(text='pos of ball 2 {};  '.format(bob2.pos))
 e = wtext(text='theta2 {} radians \n'.format(theta2))
-period1 = wtext(text = 'the period of ball 1\'s oscillation is '.format())
-period2 = wtext(text = 'the period of ball 2\'s oscillation is '.format())
+
+gd = graph(width=600, height=300, title='Theta vs. Time',xtitle='t (second)', ytitle='theta (radian)',foreground=color.black, background=color.white, xmin=0, xmax=20, ymin=-1, ymax=1)
+theta1graph = gcurve(color = color.green)
+theta2graph = gcurve(color = color.blue)
 
 # Set up time ranges
 tmin = 0
@@ -47,12 +47,10 @@ tmax = 50
 step = 10000
 dt = (tmax - tmin)/step
 
-t = 0 #record the time
+#record the time
+t = 0
 
 # Record the motion
-
-t1 = [0, 0]
-t2 = [0, 0]
 
 while(t < tmax):
     d1 = bob1.pos.x - pivot1.x
@@ -64,17 +62,13 @@ while(t < tmax):
     x1 = bob1.pos.x + v1*dt
     theta1 = x1 / Ls
     y1 = np.sqrt(Ls**2 - (x1 - pivot1.x)**2)
+    theta1graph.plot(pos = (t, theta1))
 
     v2 = v2 + a2*dt
     x2 = bob2.pos.x + v2*dt
     theta2 = x2 / Ls
     y2 = np.sqrt(Ls**2 - (x2 - pivot2.x)**2)
-
-    if(theta1 == initial1):
-        t1.append(t - t1[-1])
-    
-    if(theta2 == initial2):
-        t2.append(t - t2[-1])
+    theta2graph.plot(pos = (t, theta2))
 
     # Update the position of both balls
     bob1.pos = vector(x1, y1, 0)
@@ -91,8 +85,6 @@ while(t < tmax):
     c.text = 'theta1 {} radians \n'.format(theta1)
     d.text = 'pos of ball 2 {};  '.format(bob2.pos)
     e.text = 'theta2 {} radians \n'.format(theta2)
-    period1 = 'the period of ball 1\'s oscillation is '.format(np.average(t1))
-    period2 = 'the period of ball 2\'s oscillation is '.format(np.average(t2))
 
     rate(50)
     t = t + dt
