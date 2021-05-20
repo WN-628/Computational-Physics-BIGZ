@@ -10,8 +10,6 @@ L0 = 10 #initial length of the spring in meters
 theta = np.pi/6 #initial angle
 angvel = 0.0 #rad/s initial angular velocity
 k = 5 #spring constant
-v_x = 0
-v_y = 0
 L = (m*g*np.cos(theta))/k + L0
 angularV = 0 #angular velocity in rad / sec
 
@@ -41,7 +39,7 @@ while(t < tmax):
     theta = theta - angularV*dt
     rate(1500)
     L = (m*g*np.cos(theta))/k + L0
-    bob.pos = vector(pivot.x + L*np.sin(theta), pivot.y - L*np.cos(theta) + v_y*dt, 0)
+    bob.pos = vector(pivot.x + L*np.sin(theta), pivot.y - L*np.cos(theta), 0)
     rod.axis = bob.pos - rod.pos
     t = t + dt
     lengthDisp.text = 'length of the spring: {} m'.format(L)

@@ -8,15 +8,15 @@ from vpython import *
 # Constant
 m1 = 5 # Mass of the ball at the left (kg)
 v1 = 0 # The speed of ball1 (m/s)
-m2 = 10 # Mass of the ball at the right (kg)
+m2 = 5 # Mass of the ball at the right (kg)
 v2 = 0 # The speed of ball2 (m/s)
 Ls = 10 # Length of the string (m)
 L0 = 10 # Original length of the spring (m)
 L = L0 # Instant length of the spring(m)
 k = 10 # Spring constant (kg / s^2)
 g = 9.8 # Gravitational constant
-theta1 = -np.pi/30 # The angle for the first ball
-theta2 = np.pi/50 # The angle for the second ball
+theta1 = -np.pi/20 # The angle for the first ball
+theta2 = np.pi/20 # The angle for the second ball
 
 # Initialize the objects
 canvas(width = 1280, height = 720) # For 1080p screen
