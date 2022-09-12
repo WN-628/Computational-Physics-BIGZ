@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 
 g = lambda x : 2 - np.exp(-x)
@@ -17,3 +18,4 @@ def accFunction(g, x0, Nmax, accuracy):
         print("The root of this function is ", x_current, ". \nThe accuracy is ", acc)
 
 accFunction(y, 10, 500000, 10**(-6))
+# %%
